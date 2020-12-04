@@ -55,6 +55,10 @@ float readHumidity()
     return bme.readHumidity();
 }
 
+float readAtmPressure()
+{
+  return bme.readPressure();
+}
 
 
 void setup() {
@@ -89,6 +93,7 @@ void setup() {
 void loop() {
   float temperature = readTemperature();
   float humidity = readHumidity();
+  float atmPressure = readAtmPressure();
 
   delay(500);
   display.clearDisplay();
@@ -101,7 +106,10 @@ void loop() {
   display.print("C \n");
   display.print("Humidity: ");
   display.print(humidity);
-  display.print("%");
+  display.print("% \n");
+    display.print("Pressure: ");
+  display.print(atmPressure / 100);
+  display.print(" hPa");
   display.setCursor(0,0);
   display.display(); // actually display all of the above
   delay(300);
