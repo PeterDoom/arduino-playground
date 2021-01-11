@@ -35,27 +35,6 @@ Adafruit_SSD1306 display = Adafruit_SSD1306(128, 32, &Wire);
   #define BUTTON_C  5
 #endif
 
-int BME_CS = 10;
-Adafruit_BME280 bme(BME_CS);
-void initSensor()
-{
-    if (!bme.begin())
-    {
-        Serial.println("Could not find a valid BME280 sensor");
-    }
-}
-
-float readTemperature()
-{
-    return bme.readTemperature();
-}
-
-float readHumidity()
-{
-    return bme.readHumidity();
-}
-
-
 
 void setup() {
   Serial.begin(9600);
@@ -82,7 +61,6 @@ void setup() {
   pinMode(BUTTON_B, INPUT_PULLUP);
   pinMode(BUTTON_C, INPUT_PULLUP);
 
-  initSensor();
   
 }
 
@@ -95,25 +73,32 @@ void uwu(){
 }
 
 void uwuWhyMustYouHurtMe(){
-  
+    display.print("OUCH \n");
+    display.print("\n");
+    display.print("It hurts.");
+}
+
+void uwuUWU(){
+  display.print("UwU");
+  display.print("\n");
 }
 
 void loop() {
-  float temperature = readTemperature();
-  float humidity = readHumidity();
 
-  delay(500);
+  delay(800);
   display.clearDisplay();
-  // text display tests
   display.setTextSize(1);
   display.setTextColor(SSD1306_WHITE);
   display.setCursor(0,0);
 
   if(!digitalRead(BUTTON_A)) uwu();
+  if(!digitalRead(BUTTON_B)) uwuWhyMustYouHurtMe();
+  if(!digitalRead(BUTTON_C)) uwuUWU();
+
     
   display.setCursor(0,0);
   display.display(); // actually display all of the above
-  delay(300);
+  delay(100);
   yield();
   display.display();
 }
